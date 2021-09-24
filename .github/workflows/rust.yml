@@ -16,6 +16,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install trunk
       run: cargo install trunk
+    - name: Install wasm32 target
+      run: rustup target add wasm32-unknown-unknown
     - name: Build
       run: trunk build --release
     - name: Commit wwwroot to GitHub Pages
