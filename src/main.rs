@@ -79,21 +79,23 @@ impl Component for Model {
     }
 
     fn view(&self) -> Html {
+        let hours_angle = (self.date.get_hours() as f32 % 12.0) / 12.0 * 360.0;
+        let minutes_angle = (self.date.get_minutes() as f32 % 60.0) / 60.0 * 360.0;
+        let seconds_angle = (self.date.get_seconds() as f32 % 60.0) / 60.0 * 360.0;
+
         html! {
-            <div style="height: 100%;">
-                <svg style="display: block; margin-left: auto; margin-right: auto; height: 100%;" viewbox="0 0 100% 100%">
-                    <circle cx=100 cy=100 r=98 fill="none" stroke="#1a202c"/>
+            <svg style="display: block; height: 100%; width: 100%;" viewbox="0 0 100% 100%">
+                <circle cx="50%" cy="50%" r="30%" fill="none" stroke="#1a202c"/>
 
-                    // hours
-                    <line x1=100 y1=100 x2=50 y2=100 stroke="#2d3748" stroke-width=4 stroke-linecap="round" transform=format!("rotate({} 100 100)", (self.date.get_hours() as f32 % 12.0) / 12.0 * 360.0) />
+                // hours
+                <line x1="50%" y1="50%" x2="50%" y2="40%" stroke="#2d3748" stroke-width=6 stroke-linecap="round" transform=format!("rotate({})", hours_angle) transform-origin="50% 50%"/>
 
-                    // minutes
-                    <line x1=100 y1=100 x2=30 y2=100 stroke="#2d3748" stroke-width=3 stroke-linecap="round" transform=format!("rotate({} 100 100)", (self.date.get_minutes() as f32 % 60.0) / 60.0 * 360.0) />
+                // minutes
+                <line x1="50%" y1="50%" x2="50%" y2="28%" stroke="#2d3748" stroke-width=3 stroke-linecap="round" transform=format!("rotate({})", minutes_angle) transform-origin="50% 50%"/>
 
-                    // seconds
-                    <line x1=100 y1=100 x2=10 y2=100 stroke="#e53e3e" stroke-width=2 stroke-linecap="round" transform=format!("rotate({} 100 100)", (self.date.get_seconds() as f32 % 60.0) / 60.0 * 360.0) />
-                </svg>
-            </div>
+                // seconds
+                <line x1="50%" y1="50%" x2="50%" y2="24%" stroke="#e53e3e" stroke-width=2 stroke-linecap="round" transform=format!("rotate({})", seconds_angle) transform-origin="50% 50%"/>
+            </svg>
         }
     }
 }
