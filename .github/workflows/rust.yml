@@ -19,7 +19,7 @@ jobs:
     - name: Install wasm32 target
       run: rustup target add wasm32-unknown-unknown
     - name: Build
-      run: trunk build --release
+      run: trunk build --release --public-url /wasm-clock/
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
